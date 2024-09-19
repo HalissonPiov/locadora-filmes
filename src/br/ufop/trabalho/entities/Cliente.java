@@ -7,6 +7,7 @@ public class Cliente extends Pessoa{
 	private int codigo; 
 	//Um cliente terá um array de filmes que armazenarão os filmes por ele locados
 	private ArrayList<Filme> filmes;
+	private ArrayList<Dependentes> dependentes;
 
 	//Um cliente também terá um array de dependentes
 //	private ArrayList<Dependente> dependentes;
