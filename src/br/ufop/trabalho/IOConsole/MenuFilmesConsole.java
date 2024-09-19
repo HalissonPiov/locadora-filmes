@@ -232,7 +232,7 @@ public class MenuFilmesConsole {
         System.out.println("Digite o novo gênero do filme (deixe em branco para manter o mesmo):");
         String genero = input.nextLine();
         input.nextLine();
-        System.out.println("Digite o novo tipo do filme (deixe em branco para manter o mesmo):");
+        System.out.println("Digite o novo tipo do filme escolhido :");
         String tipo = selecionarTipoFilme();
         input.nextLine();
         System.out.println("Digite a nova quantidade de DVDs disponíveis (digite -1 para manter o mesmo):");
