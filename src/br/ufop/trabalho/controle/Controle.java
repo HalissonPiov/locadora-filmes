@@ -6,7 +6,9 @@ import java.util.List;
 import br.ufop.trabalho.Util;
 import br.ufop.trabalho.entities.Cliente;
 import br.ufop.trabalho.entities.Data;
+import br.ufop.trabalho.entities.Dependentes;
 import br.ufop.trabalho.entities.Filme;
+import br.ufop.trabalho.entities.FilmeAlugado;
 
 /***
  * Classe de regra de negócios da aplicação. Esta classe deverá controlar todos
@@ -28,6 +30,7 @@ public class Controle {
 
 	// Array de filmes
 	private ArrayList<Filme> filmes;
+	private ArrayList<FilmeAlugado> filmesAlugados = new ArrayList<>();
 
 	public Controle() {
 		clientes = new ArrayList<Cliente>();
@@ -44,21 +47,16 @@ public class Controle {
 
 		Cliente cliente = new Cliente(nome, end, codigo, cpf, dataNascimento);
 		this.clientes.add(cliente);
-
+		
 		return Constantes.RESULT_OK;
 	}
 
 	public boolean verificarQuantDepend(String cpfCliente) {
 
-		int contagem = 0;
-
 		for (Cliente cliente : clientes) {
-			if (cliente.getCpf().equals(cpfCliente) || cliente.getQuantDependentes() == 1) {
-				contagem++;
+			if (cliente.getCpf().equals(cpfCliente) && cliente.getQuantDependentes() == 3) {
+				return false;
 			}
-		}
-		if (contagem == 3) {
-			return false;
 		}
 		return true;
 	}
@@ -67,11 +65,50 @@ public class Controle {
 		return clientes.size();
 	}
 
+	public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
 	public Cliente getClienteNaPosicao(int pos) {
 		if (pos >= 0 && pos < getQtdClientes()) {
 			return clientes.get(pos);
 		}
 		return null;
+	}
+
+	public int getPosicaoCliente(Cliente cliente) {
+		for (int i = 0; i < clientes.size(); i++) {
+			if (cliente.getCpf() == getClienteNaPosicao(i).getCpf()
+					&& cliente.getNome() == getClienteNaPosicao(i).getNome()) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	public List<Cliente> encontrarCliente(int opcao, String nomeCliente, int codigo, String nomeDependente) {
+		ArrayList<Cliente> retorno = new ArrayList<>();
+		for (Cliente c : clientes) {
+			if (opcao == 1) {
+				if (c.getNome().equalsIgnoreCase(nomeCliente)) {
+					retorno.add(c);
+				}
+			} else if (opcao == 2) {
+				if (c.getCodigo() == codigo) {
+					retorno.add(c);
+				}
+			} else if (opcao == 3) {
+				String result = c.pesquisarNomeDependente(nomeDependente);
+				if (result != "") {
+					retorno.add(c);
+				}
+			}
+		}
+		return retorno;
 	}
 
 	// Métodos para filmes
@@ -128,18 +165,34 @@ public class Controle {
 		return resultados;
 	}
 
-	public boolean locarFilmeParaCliente(Filme filme, Cliente cliente) {
-		if (filme.getQuantidadeDVDs() > 0 || filme.getQuantidadeBluRays() > 0) {
-			// Lógica para locar o filme ao cliente (por exemplo, diminuir a quantidade
-			// disponível)
-			if (filme.getQuantidadeDVDs() > 0) {
-				filme.setQuantidadeDVDs(filme.getQuantidadeDVDs() - 1);
-			} else {
-				filme.setQuantidadeBluRays(filme.getQuantidadeBluRays() - 1);
+	public Cliente buscarClientePorCpf(String cpfCliente) {
+
+		for (Cliente cliente : clientes) {
+			if (cliente.getCpf().equals(cpfCliente)) {
+				return cliente;
 			}
-			return true;
 		}
-		return false;
+		System.out.println("Não foi encontrado");
+		return null;
+	}
+
+	public boolean locarFilmeParaCliente(Filme filme, Cliente cliente) {
+		// Verifica se há DVDs ou Blu-rays disponíveis
+		if (filme.getQuantidadeDVDs() > 0 || filme.getQuantidadeBluRays() > 0) {
+			// Lógica para locar o filme ao cliente (diminuir a quantidade disponível)
+			if (filme.getQuantidadeDVDs() > 0) {
+				filme.setQuantidadeDVDs(filme.getQuantidadeDVDs() - 0); // Diminui a quantidade de DVDs
+			} else {
+				filme.setQuantidadeBluRays(filme.getQuantidadeBluRays() - 0); // Diminui a quantidade de Blu-rays
+			}
+
+			// Adiciona o filme alugado à lista de filmes alugados
+			FilmeAlugado filmeAlugado = new FilmeAlugado(filme, cliente);
+			filmesAlugados.add(filmeAlugado); // Supondo que você tenha a lista filmesAlugados
+
+			return true; // Indica que a locação foi bem-sucedida
+		}
+		return false; // Indica que não havia filmes disponíveis para locação
 	}
 
 	public int editarFilme(Filme filme, String novoGenero, String novoTipo, int novaQtdDVDs, int novaQtdBluRays) {
@@ -163,5 +216,17 @@ public class Controle {
 		// Outras validações podem ser necessárias
 
 		return Constantes.RESULT_OK;
+	}
+
+	public ArrayList<FilmeAlugado> getFilmesAlugados() {
+		return filmesAlugados;
+	}
+
+	public double calcularMulta(int dias) {
+
+		double valorMulta = 2 * dias;
+
+		return valorMulta;
+
 	}
 }

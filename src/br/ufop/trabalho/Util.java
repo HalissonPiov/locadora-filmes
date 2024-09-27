@@ -56,7 +56,7 @@ public class Util {
 				continua = false;		
 			}
 			catch(InputMismatchException e){
-				System.out.println("Erro ao ler n�mero! Digite novamente:");
+				System.out.println("Erro ao ler número! Digite novamente:");
 				in.nextLine();
 				continua = true;
 			}

@@ -10,13 +10,9 @@ public class Data {
 	// construtor: chama checarMes para confirmar o valor adequado para mes;
 	// chama checarDia para confirmar o valor adequado para dia
 	public Data(int d, int m, int a) {
-
-		d = checarDia(d);
-		m = checarMes(m);
-
+		setMes(m);
 		setDia(d);
 		setAno(a);
-		setMes(m);
 	}
 
 	/**

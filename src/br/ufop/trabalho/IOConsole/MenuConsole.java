@@ -27,7 +27,7 @@ public class MenuConsole {
     }
 
     private boolean exibeMenuPrincipal() {
-        System.out.println("Digite a opção de Acesso:\n\t[1] - Filme:\n\t[2] - Clientes\n\t[3] - Relatórios\n\t[4] - Sair ");
+        System.out.println("Digite a opção de Acesso:\n\t[1] - Filme\n\t[2] - Clientes\n\t[3] - Relatórios\n\t[4] - Sair ");
         int op = Util.leInteiroConsole(input);
         switch (op) {
             case 1:
@@ -37,7 +37,7 @@ public class MenuConsole {
                 menuCliente.exibeMenuClientes();
                 break;
             case 3:
-                System.out.println("Falta implementar!");
+
                 break;
             case 4:
                 return false;
