@@ -61,7 +61,7 @@ public class MenuConsole {
 		case 4:
 			System.out.println(
 					"[ Atenção: os cadastros de entrada e de saída abaixo permitem realizar essas ações de forma manual.\n"
-					+ "Entradas realizadas por clientes dentro da plataforma são computadas automaticamente quando feitas]\n");
+							+ "Entradas realizadas por clientes dentro da plataforma são computadas automaticamente quando feitas]\n");
 			System.out.println(
 					"[1] Cadastro de entrada\n[2] Cadastro de saída\n[3] Busca de movimentações\n[4] Balancete por mês\n[5] Balancete por ano");
 			int escolha = Util.leInteiroConsole(input);

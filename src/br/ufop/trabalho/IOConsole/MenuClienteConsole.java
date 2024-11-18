@@ -256,18 +256,24 @@ public class MenuClienteConsole {
 						System.out.println("[1] Confirmar devolução\n[2] Voltar");
 						int opc = Util.leInteiroConsole(input);
 						if (opc == 1) {
-							// Adiciona a lógica de entrada ao devolver filme
-							double valorDevolucao = 0; // Defina o valor aqui, se aplicável
+							
+							double valorDevolucao = 0; 
 							Entrada entrada = new Entrada("Devolução de Filme",
 									"Cliente: " + cliente.getNome() + " - Filme devolvido: " + filmeEscolhido.getNome(),
 									valorDevolucao, LocalDate.now());
-							cliente.adicionarEntrada(entrada); // Certifique-se de que esse método existe
+							cliente.adicionarEntrada(entrada); 
 
 							listaDeFilmes.remove(escolha - 1);
 							System.out.println("Filme devolvido com sucesso");
-
-							// Exibe as informações da entrada
 							exibirEntrada(entrada);
+							
+							System.out.println("\n[1] Avaliar o filme\n[2] Não avaliar o filme");
+							int selecionado = Util.leInteiroConsole(input);
+							
+							if(selecionado == 1) {
+								avaliarFilme(filmeEscolhido);
+							}
+							
 						} else {
 							return;
 						}
@@ -315,9 +321,18 @@ public class MenuClienteConsole {
 		System.out.println("Data: " + entrada.getDataEntrada());
 	}
 
+	public void avaliarFilme(Filme filme) {
+		
+		System.out.println("Selecione a classificação:");
+		System.out.println("[1] ⭐\t[2] ⭐⭐\t[3] ⭐⭐⭐\t[4] ⭐⭐⭐⭐\t[5] ⭐⭐⭐⭐⭐");
+		int opcao = input.nextInt();
+
+		Filme.setAvaliacao(opcao);
+		System.out.println("Registrada a avaliação: " + opcao + " estrelas.");
+	}
+	
 	public void editarCliente(Cliente cliente) {
 		int op;
-
 		System.out.println(
 				"[1] Adicionar um novo dependente\n[2] Remover um dependente\n[3] Editar dados cadastrais do cliente\n[4] Voltar");
 		op = Util.leInteiroConsole(input);

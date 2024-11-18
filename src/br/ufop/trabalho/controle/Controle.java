@@ -45,9 +45,9 @@ public class Controle {
 	public double calcularTotalEntradas() {
 	    double total = 0.0;
 	    for (Entrada entrada : entrada) {
-	        total += entrada.getValor(); // Soma o valor de cada entrada
+	        total += entrada.getValor();
 	    }
-	    return total; // Retorna o total calculado
+	    return total; 
 	}
 	
 	private void exibirSaldo(double totalEntradas, double totalSaidas, String periodo) {
@@ -57,10 +57,7 @@ public class Controle {
 	    System.out.printf("Saldo (%s): R$ %.2f\n", periodo, saldo);
 	}
 	
-	
-	
-	// ---
-	public static int quantTotalDVD = 0; // var estática: pertence à classe e não a uma instância dela
+	public static int quantTotalDVD = 0; 
 	public static int quantTotalBluRays = 0;
 	public static int valorTotalMulta = 0;
 	public static double aluguelImovel = 950;
@@ -68,7 +65,6 @@ public class Controle {
 	public static double valorDVD = 1.50;
 	public static double valorBluRay = 2.50;
 
-	// ---
 
 	public Controle() {
 		clientes = new ArrayList<Cliente>();

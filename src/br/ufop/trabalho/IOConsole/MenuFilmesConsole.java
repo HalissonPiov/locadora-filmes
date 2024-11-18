@@ -25,7 +25,7 @@ public class MenuFilmesConsole {
 		boolean continua = true;
 		do {
 			System.out.println(
-					"Digite a opção desejada:\n\t1 - Cadastro de Filme\n\t2 - Busca de Filme\n\t3 - Voltar ao Menu Principal");
+					"Digite a opção desejada:\n\t[1] - Cadastro de Filme\n\t[2] - Busca de Filme\n\t[3] - Voltar ao Menu Principal");
 			int op = Util.leInteiroConsole(input);
 			switch (op) {
 			case 1:
@@ -271,7 +271,7 @@ public class MenuFilmesConsole {
 			locarFilme(filme);
 			break;
 		case 4:
-			verFilmesAlugados(); // Chamada ao novo método
+			verFilmesAlugados();
 			break;
 		default:
 			System.out.println("Opção inválida.");
@@ -344,8 +344,8 @@ public class MenuFilmesConsole {
 	}
 
 	private void verFilmesAlugados() {
-		// Vamos assumir que existe um método no Controle que retorna os filmes alugados
-		ArrayList<FilmeAlugado> filmesAlugados = controle.getFilmesAlugados(); // Crie este método no Controle
+
+		ArrayList<FilmeAlugado> filmesAlugados = controle.getFilmesAlugados();
 
 		if (filmesAlugados.isEmpty()) {
 			System.out.println("Nenhum filme alugado no momento.");
@@ -361,9 +361,9 @@ public class MenuFilmesConsole {
 	private void editarFilme(Filme filme) {
 
 		System.out.println("Escolha o novo gênero do filme (ou digite 0 para manter o mesmo):");
-		String genero = selecionarGenero(); // Use selecionarGenero() for choosing the genre
+		String genero = selecionarGenero();
 		if (genero.equals("0")) {
-			genero = filme.getGenero(); // If the user selects "0", keep the current genre
+			genero = filme.getGenero();
 		}
 		System.out.println("Digite o novo tipo do filme (deixe em branco para manter o mesmo):");
 		String tipo = selecionarTipoFilme();
@@ -374,7 +374,6 @@ public class MenuFilmesConsole {
 		int qtdBluRays = Util.leInteiroConsole(input);
 
 		// Atualizar apenas os campos que não foram deixados em branco
-
 		if (genero.isEmpty())
 			genero = filme.getGenero();
 		if (tipo.isEmpty())
