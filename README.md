@@ -5,7 +5,7 @@
 ## ⚙️ Principais Funcionalidades do Projeto
 ### Parte de Controle e Armazenamento
 - Filmes: cadastro, busca, estoque
-- Clientes: cadastro, busca, locação de filme, pagamento de multas,
+- Clientes: cadastro, busca, pagamento de multas, locação e avaliação de filmes
 - Relatórios: registros dos filmes e clientes
 ### Parte financeira
 - Registros de entrada e saída da locadora, com a descrição das movimentações
